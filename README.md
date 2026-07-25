@@ -25,6 +25,17 @@ As opções A e C ficam no repositório como registro da escolha:
 | A | Autos | Dossiê jurídico — papel frio, Spectral, margem com citações legais, carimbo |
 | C | Banca | Institucional — Bodoni Moda, linha de prumo em ouro, um único bloco invertido |
 
+### Sem ilustração
+
+A faixa central não usa imagem. O aperto de mão entre humano e robô é o clichê mais gasto da
+categoria, e o console operável, o quadro de fases e a tabela de artefatos já provam capacidade
+melhor do que uma foto provaria. No lugar dela, um painel de declaração: o texto forte à
+esquerda sobre um filete teal, a glosa em três parágrafos à direita.
+
+Os geradores das duas tentativas de ilustração continuam em `design/art/`, sem uso:
+`gen_handshake.py` (enquadramento fechado nas mãos) e `gen_scene.py` (plano médio com as duas
+figuras). Vetor desenhado à mão não alcança realismo fotográfico — o rosto é o que denuncia.
+
 ### Ilustrações
 
 Todo o material gráfico é SVG autoral desenhado no repositório — o CSP da publicação bloqueia
@@ -55,7 +66,8 @@ design/
 ## Build
 
 ```bash
-python3 design/build.py
+python3 design/build.py       # gera dist/ a partir de src/
+python3 design/export_pdf.py  # gera dist/prumo.pdf a partir de dist/index.html
 ```
 
 Lê cada arquivo de `design/src`, substitui o marcador `/* FONTFACE */` pelas regras `@font-face`
