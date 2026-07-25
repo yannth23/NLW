@@ -31,7 +31,9 @@ Todo o material gráfico é SVG autoral desenhado no repositório — o CSP da p
 qualquer imagem externa.
 
 O aperto de mão é gerado por `design/art/gen_handshake.py`, que emite o fragmento SVG para colar
-em `design/src/index.html`. Os dedos do robô e o polegar humano são cadeias de cápsulas com
+em `design/src/index.html`. `design/art/gen_scene.py` desenha a mesma cena em plano médio, com o
+executivo de perfil e o robô inteiros; ficou estilizada demais para o tom do site e não está em
+uso, mas continua no repositório. Os dedos do robô e o polegar humano são cadeias de cápsulas com
 largura decrescente, e o biseléé derivado da mesma curva — escrever isso à mão eram cinquenta
 elementos quase idênticos que saíam de alinhamento a cada ajuste.
 
