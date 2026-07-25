@@ -18,16 +18,17 @@
   --red:#DB5F52;
   --green:#4EB47C;
 
-  /* illustration tokens — restated per theme so the art follows the page */
-  --art-grid:#16202D;
-  --art-suit-a:#1F2A38;   --art-suit-b:#3B4A5C;
-  --art-cuff:#B7C4D4;     --art-cuff-line:#94A3B6;
-  --art-skin-a:#5C6979;   --art-skin-b:#9DAAB9;
-  --art-thumb-a:#8996A6;  --art-thumb-b:#6D7A8A;
-  --art-seam:#4E5B6B;
-  --art-bot:#0E2A32;      --art-plate-a:#0E2F37;  --art-plate-b:#23625F;
-  --art-finger-a:#246663; --art-finger-b:#164A4C;
-  --art-joint:#17454C;
+  /* Illustration. The materials — skin, wool, steel — are physical and do not
+     invert with the theme; only the backdrop and the cast-shadow colour follow
+     the page. */
+  --art-suit-lo:#1A2230;   --art-suit-mid:#2C3A4E;  --art-suit-hi:#4A5C74;
+  --art-shirt-lo:#B9C4D2;  --art-shirt-hi:#F2F5F9;
+  --art-skin-hi:#E8C09B;   --art-skin-mid:#C99672;  --art-skin-lo:#A06F4F;
+  --art-skin-shadow:#5E3A28;
+  --art-nail-hi:#F0D6C0;   --art-nail-lo:#C79E80;
+  --art-metal-hi:#D3DCE4;  --art-metal-mid:#94A2B0; --art-metal-lo:#3E4B58;
+  --art-metal-deep:#232E3A; --art-cable:#151C25;
+  --art-back-a:#131C28;--art-back-b:#0A111A;--art-key:rgba(70,102,124,.5);--art-shadow:#04070C;
 
   --sans:'Archivo',system-ui,sans-serif;
   --mono:'Plex Mono',ui-monospace,monospace;
@@ -39,11 +40,8 @@
     --bg:#EEF2F7;--panel:#FFFFFF;--panel-2:#F6F9FC;--line:#DBE3ED;--line-soft:#E7EDF4;
     --text:#22303F;--text-hi:#0B1420;--muted:#5D6C7F;
     --teal:#0E7A73;--amber:#8F6410;--red:#AF382C;--green:#1C7A4D;
-    --art-grid:#E4EAF2;
-    --art-suit-a:#33445A;--art-suit-b:#5C6E86;--art-cuff:#F2F5F9;--art-cuff-line:#C3CEDC;
-    --art-skin-a:#8B98A8;--art-skin-b:#C2CCD8;--art-thumb-a:#B6C1CE;--art-thumb-b:#94A1B0;
-    --art-seam:#7C8A9C;--art-bot:#0F5A56;--art-plate-a:#0B4F4C;--art-plate-b:#1E8079;
-    --art-finger-a:#137A73;--art-finger-b:#0B5B57;--art-joint:#0D6660;
+  --art-grid:#E4EAF2;
+  --art-back-a:#E7EDF4;--art-back-b:#CFDAE6;--art-key:rgba(255,255,255,.75);--art-shadow:#3A4B5E;
   }
 }
 :root[data-theme="dark"]{
@@ -51,20 +49,14 @@
   --text:#CBD8E7;--text-hi:#EAF1F9;--muted:#78899F;
   --teal:#35A8A0;--amber:#DFA23A;--red:#DB5F52;--green:#4EB47C;
   --art-grid:#16202D;
-  --art-suit-a:#1F2A38;--art-suit-b:#3B4A5C;--art-cuff:#B7C4D4;--art-cuff-line:#94A3B6;
-  --art-skin-a:#5C6979;--art-skin-b:#9DAAB9;--art-thumb-a:#8996A6;--art-thumb-b:#6D7A8A;
-  --art-seam:#4E5B6B;--art-bot:#0E2A32;--art-plate-a:#0E2F37;--art-plate-b:#23625F;
-  --art-finger-a:#246663;--art-finger-b:#164A4C;--art-joint:#17454C;
+  --art-back-a:#131C28;--art-back-b:#0A111A;--art-key:rgba(70,102,124,.5);--art-shadow:#04070C;
 }
 :root[data-theme="light"]{
   --bg:#EEF2F7;--panel:#FFFFFF;--panel-2:#F6F9FC;--line:#DBE3ED;--line-soft:#E7EDF4;
   --text:#22303F;--text-hi:#0B1420;--muted:#5D6C7F;
   --teal:#0E7A73;--amber:#8F6410;--red:#AF382C;--green:#1C7A4D;
   --art-grid:#E4EAF2;
-  --art-suit-a:#33445A;--art-suit-b:#5C6E86;--art-cuff:#F2F5F9;--art-cuff-line:#C3CEDC;
-  --art-skin-a:#8B98A8;--art-skin-b:#C2CCD8;--art-thumb-a:#B6C1CE;--art-thumb-b:#94A1B0;
-  --art-seam:#7C8A9C;--art-bot:#0F5A56;--art-plate-a:#0B4F4C;--art-plate-b:#1E8079;
-  --art-finger-a:#137A73;--art-finger-b:#0B5B57;--art-joint:#0D6660;
+  --art-back-a:#E7EDF4;--art-back-b:#CFDAE6;--art-key:rgba(255,255,255,.75);--art-shadow:#3A4B5E;
 }
 
 *{box-sizing:border-box}
@@ -148,10 +140,9 @@ h2{font-size:clamp(1.45rem,2.6vw,2rem);font-weight:700;letter-spacing:-.025em;li
 @media (min-width:940px){.band{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
 .band .art{
   border-bottom:1px solid var(--line);display:flex;align-items:center;position:relative;
-  background-color:var(--panel-2);
-  background-image:linear-gradient(var(--art-grid) 1px,transparent 1px),
-                   linear-gradient(90deg,var(--art-grid) 1px,transparent 1px);
-  background-size:45px 45px;
+  background-color:var(--art-back-b);
+  background-image:radial-gradient(62% 74% at 50% 46%,var(--art-key) 0%,transparent 72%),
+                   linear-gradient(158deg,var(--art-back-a),var(--art-back-b));
 }
 @media (min-width:940px){.band .art{border-bottom:none;border-right:1px solid var(--line)}}
 .band .art svg{display:block;width:100%;height:auto}
@@ -318,61 +309,153 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offse
   <section>
     <div class="band">
       <div class="art">
-        <svg viewBox="90 138 780 300" role="img"
-             aria-label="Ilustração de um aperto de mão entre um executivo de terno e um braço robótico">
+        <svg viewBox="228 128 528 336" role="img"
+             aria-label="Ilustração de um aperto de mão entre um executivo de terno e uma mão robótica">
           <defs>
-            <linearGradient id="suitG" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="var(--art-suit-a)"/><stop offset="1" stop-color="var(--art-suit-b)"/>
+            <linearGradient id="suit" x1="0" y1="1" x2="0.7" y2="0">
+              <stop offset="0" stop-color="var(--art-suit-lo)"/>
+              <stop offset=".55" stop-color="var(--art-suit-mid)"/>
+              <stop offset="1" stop-color="var(--art-suit-hi)"/>
             </linearGradient>
-            <linearGradient id="skinG" x1="0.1" y1="1" x2="0.8" y2="0">
-              <stop offset="0" stop-color="var(--art-skin-a)"/><stop offset="1" stop-color="var(--art-skin-b)"/>
+            <linearGradient id="shirt" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="var(--art-shirt-lo)"/>
+              <stop offset="1" stop-color="var(--art-shirt-hi)"/>
             </linearGradient>
-            <linearGradient id="skinF" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="var(--art-thumb-a)"/><stop offset="1" stop-color="var(--art-thumb-b)"/>
+
+            <radialGradient id="skin" cx="0.42" cy="0.3" r="0.85">
+              <stop offset="0" stop-color="var(--art-skin-hi)"/>
+              <stop offset=".45" stop-color="var(--art-skin-mid)"/>
+              <stop offset="1" stop-color="var(--art-skin-lo)"/>
+            </radialGradient>
+            <radialGradient id="knuckle" cx="0.38" cy="0.32" r="0.7">
+              <stop offset="0" stop-color="var(--art-skin-hi)"/>
+              <stop offset="1" stop-color="var(--art-skin-mid)" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="skinThumb" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--art-skin-hi)"/>
+              <stop offset=".5" stop-color="var(--art-skin-mid)"/>
+              <stop offset="1" stop-color="var(--art-skin-lo)"/>
             </linearGradient>
-            <linearGradient id="plateG" x1="1" y1="1" x2="0" y2="0">
-              <stop offset="0" stop-color="var(--art-plate-a)"/><stop offset="1" stop-color="var(--art-plate-b)"/>
+            <linearGradient id="nail" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--art-nail-hi)"/>
+              <stop offset="1" stop-color="var(--art-nail-lo)"/>
             </linearGradient>
-            <linearGradient id="fingerG" x1="1" y1="0" x2="0" y2="0">
-              <stop offset="0" stop-color="var(--art-finger-a)"/><stop offset="1" stop-color="var(--art-finger-b)"/>
+
+            <linearGradient id="aluArm" x1="0" y1="0" x2="0.15" y2="1">
+              <stop offset="0" stop-color="var(--art-metal-mid)"/>
+              <stop offset=".28" stop-color="var(--art-metal-lo)"/>
+              <stop offset="1" stop-color="var(--art-metal-deep)"/>
             </linearGradient>
+            <linearGradient id="alu" x1="0" y1="0" x2="0.2" y2="1">
+              <stop offset="0" stop-color="var(--art-metal-hi)"/>
+              <stop offset=".38" stop-color="var(--art-metal-mid)"/>
+              <stop offset="1" stop-color="var(--art-metal-lo)"/>
+            </linearGradient>
+            <linearGradient id="aluEdge" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="var(--art-metal-hi)" stop-opacity=".2"/>
+              <stop offset=".5" stop-color="var(--art-metal-hi)"/>
+              <stop offset="1" stop-color="var(--art-metal-hi)" stop-opacity=".3"/>
+            </linearGradient>
+            <radialGradient id="aluPalm" cx="0.65" cy="0.3" r="0.8">
+              <stop offset="0" stop-color="var(--art-metal-mid)"/>
+              <stop offset="1" stop-color="var(--art-metal-lo)"/>
+            </radialGradient>
+            <linearGradient id="aluFinger" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--art-metal-hi)"/>
+              <stop offset=".42" stop-color="var(--art-metal-mid)"/>
+              <stop offset="1" stop-color="var(--art-metal-lo)"/>
+            </linearGradient>
+            <radialGradient id="jointG" cx="0.35" cy="0.3" r="0.8">
+              <stop offset="0" stop-color="var(--art-metal-hi)"/>
+              <stop offset="1" stop-color="var(--art-metal-lo)"/>
+            </radialGradient>
+
+            <filter id="soften" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="7"/>
+            </filter>
+            <filter id="castShadow" x="-20%" y="-20%" width="150%" height="150%">
+              <feDropShadow dx="6" dy="10" stdDeviation="10" flood-color="var(--art-shadow)" flood-opacity=".45"/>
+            </filter>
+            <filter id="fingerShadow" x="-40%" y="-40%" width="190%" height="190%">
+              <feDropShadow dx="-3" dy="4" stdDeviation="3.5" flood-color="var(--art-shadow)" flood-opacity=".42"/>
+            </filter>
           </defs>
-
-          <path d="M942 358 L598 232 L564 312 L898 466 Z" fill="var(--art-bot)"/>
-          <path d="M942 358 L598 232" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity=".55"/>
-          <path d="M718 292 L752 214 M818 336 L852 256" stroke="var(--teal)" stroke-width="1.6" opacity=".5"/>
-          <circle cx="580" cy="272" r="26" fill="var(--art-joint)" stroke="var(--teal)" stroke-width="2.2"/>
-          <circle cx="580" cy="272" r="9" fill="var(--teal)"/>
-          <path d="M566 226 C 520 200 476 196 456 214 C 438 230 442 268 458 288
-                   C 478 312 536 318 566 302 Z" fill="url(#plateG)" stroke="var(--teal)" stroke-width="1.5"/>
-
-          <path d="M-42 377 L332 233 L368 318 L2 484 Z" fill="url(#suitG)"/>
-          <path d="M-42 377 L332 233" fill="none" stroke="var(--art-seam)" stroke-width="1.5" opacity=".8"/>
-          <path d="M332 233 L366 220 L400 302 L368 318 Z" fill="var(--art-cuff)"/>
-          <path d="M349 226 L384 310" stroke="var(--art-cuff-line)" stroke-width="1.5"/>
-          <circle cx="377" cy="288" r="5.5" fill="var(--amber)"/>
-          <path d="M362 218 C 418 192 486 180 528 192 C 556 202 562 240 546 268
-                   C 526 302 440 318 398 300 Z" fill="url(#skinG)"/>
-          <path d="M470 196 C 466 214 466 236 472 252 M508 194 C 504 212 504 234 510 250"
-                fill="none" stroke="var(--art-seam)" stroke-width="1.6" opacity=".4"/>
-
-          <g fill="none" stroke="url(#fingerG)" stroke-linecap="round">
-            <path d="M552 208 C 528 222 502 226 484 220" stroke-width="23"/>
-            <path d="M558 244 C 530 260 498 262 476 254" stroke-width="24"/>
-            <path d="M552 280 C 522 296 490 296 468 286" stroke-width="23"/>
-            <path d="M534 310 C 508 322 482 322 464 314" stroke-width="20"/>
+          <g filter="url(#castShadow)">
+          <path d="M942 366 L606 242 L578 308 L900 452 Z" fill="url(#aluArm)"/>
           </g>
-          <path d="M520 202 L516 226 M524 240 L520 266 M516 278 L512 302 M502 306 L500 326"
-                fill="none" stroke="var(--teal)" stroke-width="1.5" opacity=".6"/>
-          <g fill="var(--teal)">
-            <circle cx="491" cy="219" r="3.4"/><circle cx="484" cy="254" r="3.4"/>
-            <circle cx="476" cy="287" r="3.4"/><circle cx="472" cy="315" r="3"/>
+          <path d="M942 366 L606 242" stroke="url(#aluEdge)" stroke-width="2.6" fill="none" opacity=".85"/>
+          <path d="M900 452 L578 308" stroke="var(--art-metal-deep)" stroke-width="3" fill="none" opacity=".7"/>
+          <path d="M726 298 L754 233" stroke="var(--art-metal-deep)" stroke-width="3" opacity=".8"/>
+          <path d="M731 298 L759 233" stroke="var(--art-metal-hi)" stroke-width="1.2" opacity=".35"/>
+          <path d="M830 344 L858 278" stroke="var(--art-metal-deep)" stroke-width="3" opacity=".8"/>
+          <path d="M835 344 L863 278" stroke="var(--art-metal-hi)" stroke-width="1.2" opacity=".35"/>
+          <path d="M892 440 C 806 396 706 348 604 300" stroke="var(--art-cable)" stroke-width="7" fill="none" stroke-linecap="round" opacity=".8"/>
+          <path d="M892 440 C 806 396 706 348 604 300" stroke="var(--teal)" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".5"/>
+          <circle cx="583" cy="270" r="30" fill="url(#jointG)" stroke="var(--art-metal-lo)" stroke-width="2"/>
+          <circle cx="583" cy="270" r="30" fill="none" stroke="var(--art-metal-hi)" stroke-width="1.2" opacity=".5"/>
+          <circle cx="583" cy="270" r="12" fill="var(--teal)" opacity=".85"/>
+          <circle cx="583" cy="270" r="12" fill="none" stroke="var(--art-metal-hi)" stroke-width="1.2" opacity=".6"/>
+          <circle cx="583" cy="270" r="20" fill="none" stroke="var(--teal)" stroke-width="1.2" opacity=".35"/>
+          <path d="M572 224 C 524 198 478 194 458 213 C 439 230 443 269 460 289 C 481 313 540 319 572 303 Z" fill="url(#aluPalm)" stroke="var(--art-metal-lo)" stroke-width="1.6"/>
+          <g filter="url(#castShadow)">
+          <path d="M-42 375 L334 231 L370 317 L2 482 Z" fill="url(#suit)"/>
           </g>
-
-          <path d="M406 216 C 448 192 506 184 544 196" fill="none" stroke="url(#skinF)"
-                stroke-width="26" stroke-linecap="round"/>
-          <path d="M414 209 C 452 190 504 184 538 195" fill="none" stroke="var(--art-seam)"
-                stroke-width="1.6" opacity=".5"/>
+          <path d="M-42 375 L334 231" stroke="var(--art-suit-hi)" stroke-width="2.2" fill="none" opacity=".6"/>
+          <path d="M120 320 C 190 292 250 270 300 250" stroke="var(--art-suit-lo)" stroke-width="6" fill="none" opacity=".35"/>
+          <path d="M334 231 L370 217 L404 302 L370 317 Z" fill="url(#shirt)"/>
+          <path d="M352 224 L387 309" stroke="var(--art-shirt-lo)" stroke-width="1.6" opacity=".8"/>
+          <circle cx="380" cy="286" r="5.5" fill="var(--art-shirt-lo)"/>
+          <circle cx="378.5" cy="284.5" r="2" fill="var(--art-shirt-hi)" opacity=".8"/>
+          <g filter="url(#castShadow)">
+          <path d="M368 236 C 406 222 444 210 484 206 C 518 203 547 211 561 226 C 576 243 571 270 554 288 C 532 308 478 320 436 318 C 410 317 392 311 400 305 Z" fill="url(#skin)"/>
+          </g>
+          <ellipse cx="486" cy="218" rx="15" ry="11.7" fill="url(#knuckle)" opacity=".85"/>
+          <ellipse cx="513" cy="216" rx="16" ry="12.5" fill="url(#knuckle)" opacity=".85"/>
+          <ellipse cx="537" cy="223" rx="15" ry="11.7" fill="url(#knuckle)" opacity=".85"/>
+          <ellipse cx="556" cy="238" rx="12" ry="9.4" fill="url(#knuckle)" opacity=".85"/>
+          <path d="M412 272 C 446 244 467 239 481 229" stroke="var(--art-skin-lo)" stroke-width="2.4" fill="none" opacity=".28"/>
+          <path d="M420 286 C 464 252 493 239 507 229" stroke="var(--art-skin-lo)" stroke-width="2.4" fill="none" opacity=".28"/>
+          <path d="M430 298 C 480 260 517 245 531 235" stroke="var(--art-skin-lo)" stroke-width="2.4" fill="none" opacity=".28"/>
+          <path d="M404 306 C 452 318 512 304 553 272" stroke="var(--art-skin-shadow)" stroke-width="16" fill="none" opacity=".26" filter="url(#soften)"/>
+          <g filter="url(#soften)" opacity=".5">
+          <path d="M445 312 L443 282" stroke="var(--art-skin-shadow)" stroke-width="29" stroke-linecap="round" fill="none"/>
+          <path d="M479 312 L477 279" stroke="var(--art-skin-shadow)" stroke-width="30" stroke-linecap="round" fill="none"/>
+          <path d="M513 304 L511 273" stroke="var(--art-skin-shadow)" stroke-width="29" stroke-linecap="round" fill="none"/>
+          <path d="M539 292 L537 264" stroke="var(--art-skin-shadow)" stroke-width="27" stroke-linecap="round" fill="none"/>
+          </g>
+          <path d="M462.0 336.0 L452.0 312.0" stroke="url(#aluFinger)" stroke-width="24.0" stroke-linecap="round" fill="none" filter="url(#fingerShadow)"/>
+          <path d="M452.0 312.0 L450.0 286.0" stroke="url(#aluFinger)" stroke-width="19.0" stroke-linecap="round" fill="none"/>
+          <path d="M455.4 338.8 L445.4 314.8" stroke="var(--art-metal-hi)" stroke-width="3.8" stroke-linecap="round" fill="none" opacity=".5"/>
+          <path d="M446.3 312.4 L444.3 286.4" stroke="var(--art-metal-hi)" stroke-width="3.0" stroke-linecap="round" fill="none" opacity=".5"/>
+          <circle cx="452.0" cy="312.0" r="4.9" fill="none" stroke="var(--art-metal-lo)" stroke-width="1.4" opacity=".75"/>
+          <circle cx="452.0" cy="312.0" r="2.1" fill="var(--teal)" opacity=".9"/>
+          <path d="M496.0 336.0 L486.0 312.0" stroke="url(#aluFinger)" stroke-width="25.0" stroke-linecap="round" fill="none" filter="url(#fingerShadow)"/>
+          <path d="M486.0 312.0 L484.0 283.0" stroke="url(#aluFinger)" stroke-width="20.0" stroke-linecap="round" fill="none"/>
+          <path d="M489.1 338.9 L479.1 314.9" stroke="var(--art-metal-hi)" stroke-width="4.0" stroke-linecap="round" fill="none" opacity=".5"/>
+          <path d="M480.0 312.4 L478.0 283.4" stroke="var(--art-metal-hi)" stroke-width="3.2" stroke-linecap="round" fill="none" opacity=".5"/>
+          <circle cx="486.0" cy="312.0" r="5.2" fill="none" stroke="var(--art-metal-lo)" stroke-width="1.4" opacity=".75"/>
+          <circle cx="486.0" cy="312.0" r="2.2" fill="var(--teal)" opacity=".9"/>
+          <path d="M528.0 326.0 L520.0 304.0" stroke="url(#aluFinger)" stroke-width="24.0" stroke-linecap="round" fill="none" filter="url(#fingerShadow)"/>
+          <path d="M520.0 304.0 L518.0 277.0" stroke="url(#aluFinger)" stroke-width="19.0" stroke-linecap="round" fill="none"/>
+          <path d="M521.2 328.5 L513.2 306.5" stroke="var(--art-metal-hi)" stroke-width="3.8" stroke-linecap="round" fill="none" opacity=".5"/>
+          <path d="M514.3 304.4 L512.3 277.4" stroke="var(--art-metal-hi)" stroke-width="3.0" stroke-linecap="round" fill="none" opacity=".5"/>
+          <circle cx="520.0" cy="304.0" r="4.9" fill="none" stroke="var(--art-metal-lo)" stroke-width="1.4" opacity=".75"/>
+          <circle cx="520.0" cy="304.0" r="2.1" fill="var(--teal)" opacity=".9"/>
+          <path d="M552.0 310.0 L546.0 292.0" stroke="url(#aluFinger)" stroke-width="21.0" stroke-linecap="round" fill="none" filter="url(#fingerShadow)"/>
+          <path d="M546.0 292.0 L544.0 268.0" stroke="url(#aluFinger)" stroke-width="17.0" stroke-linecap="round" fill="none"/>
+          <path d="M546.0 312.0 L540.0 294.0" stroke="var(--art-metal-hi)" stroke-width="3.4" stroke-linecap="round" fill="none" opacity=".5"/>
+          <path d="M540.9 292.4 L538.9 268.4" stroke="var(--art-metal-hi)" stroke-width="2.7" stroke-linecap="round" fill="none" opacity=".5"/>
+          <circle cx="546.0" cy="292.0" r="4.4" fill="none" stroke="var(--art-metal-lo)" stroke-width="1.4" opacity=".75"/>
+          <circle cx="546.0" cy="292.0" r="1.9" fill="var(--teal)" opacity=".9"/>
+          <path d="M398.0 228.0 L448.0 206.0" stroke="url(#skinThumb)" stroke-width="31.0" stroke-linecap="round" fill="none" filter="url(#fingerShadow)"/>
+          <path d="M448.0 206.0 L498.0 196.0" stroke="url(#skinThumb)" stroke-width="28.0" stroke-linecap="round" fill="none"/>
+          <path d="M498.0 196.0 L546.0 203.0" stroke="url(#skinThumb)" stroke-width="23.0" stroke-linecap="round" fill="none"/>
+          <path d="M394.3 219.5 L444.3 197.5" stroke="var(--art-skin-hi)" stroke-width="5.0" stroke-linecap="round" fill="none" opacity=".35"/>
+          <path d="M446.4 197.8 L496.4 187.8" stroke="var(--art-skin-hi)" stroke-width="4.5" stroke-linecap="round" fill="none" opacity=".35"/>
+          <path d="M499.0 189.2 L547.0 196.2" stroke="var(--art-skin-hi)" stroke-width="3.7" stroke-linecap="round" fill="none" opacity=".35"/>
+          <ellipse cx="542" cy="200" rx="10" ry="8" fill="url(#nail)" transform="rotate(-10 542 200)" opacity=".9"/>
+          <path d="M406 244 C 454 222 500 212 546 218" stroke="var(--art-skin-shadow)" stroke-width="13" fill="none" opacity=".32" filter="url(#soften)"/>
+          <path d="M496 184 C 500 194 500 204 496 212" stroke="var(--art-skin-shadow)" stroke-width="2" fill="none" opacity=".28"/>
         </svg>
         <span class="fig">FIG. 1 — O LIMITE DA FERRAMENTA</span>
       </div>

@@ -28,8 +28,17 @@ As opções A e C ficam no repositório como registro da escolha:
 ### Ilustrações
 
 Todo o material gráfico é SVG autoral desenhado no repositório — o CSP da publicação bloqueia
-qualquer imagem externa. As cores da ilustração são tokens `--art-*` redefinidos por tema, de
-modo que o desenho acompanha o claro e o escuro da página.
+qualquer imagem externa.
+
+O aperto de mão é gerado por `design/art/gen_handshake.py`, que emite o fragmento SVG para colar
+em `design/src/index.html`. Os dedos do robô e o polegar humano são cadeias de cápsulas com
+largura decrescente, e o biseléé derivado da mesma curva — escrever isso à mão eram cinquenta
+elementos quase idênticos que saíam de alinhamento a cada ajuste.
+
+Os materiais (pele, lã do terno, aço) são físicos e não invertem com o tema: só o fundo, a luz
+principal e a cor da sombra projetada seguem a página, via tokens `--art-*`. O fundo e a luz
+ficam no CSS do painel, não no SVG, porque o desenho fica em letterbox dentro de um painel mais
+alto e um `rect` pintado dentro do SVG terminaria na borda do viewBox, deixando emenda visível.
 
 ## Estrutura
 
