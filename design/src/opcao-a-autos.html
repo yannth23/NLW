@@ -1,0 +1,346 @@
+<!-- FONTS: Spectral=spectral:400,600,700 | Plex Sans=ibm-plex-sans:500,600 | Plex Mono=ibm-plex-mono:400,500 -->
+<title>Prumo — Opção A: Autos</title>
+
+<style>
+/* FONTFACE */
+
+:root{
+  --paper:#EFF1EC;
+  --paper-2:#E7EAE3;
+  --ink:#12171A;
+  --ink-soft:#4A5450;
+  --rule:#C8CDC2;
+  --verde:#1D4635;
+  --latao:#8A6B33;
+  --carimbo:#9A2B1E;
+
+  --serif:'Spectral',Charter,Georgia,serif;
+  --sans:'Plex Sans',system-ui,sans-serif;
+  --mono:'Plex Mono',ui-monospace,monospace;
+
+  --measure:64ch;
+  --gap:clamp(3.5rem,7vw,6.5rem);
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#12161A;
+    --paper-2:#191E22;
+    --ink:#E3E7E0;
+    --ink-soft:#98A39D;
+    --rule:#2C3439;
+    --verde:#5FA184;
+    --latao:#C4A15C;
+    --carimbo:#D0655A;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#EFF1EC;--paper-2:#E7EAE3;--ink:#12171A;--ink-soft:#4A5450;
+  --rule:#C8CDC2;--verde:#1D4635;--latao:#8A6B33;--carimbo:#9A2B1E;
+}
+:root[data-theme="dark"]{
+  --paper:#12161A;--paper-2:#191E22;--ink:#E3E7E0;--ink-soft:#98A39D;
+  --rule:#2C3439;--verde:#5FA184;--latao:#C4A15C;--carimbo:#D0655A;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:19px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem)}
+
+/* ---- rail: the margin of a case file, carrying its citations ---- */
+.sheet{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:1000px){
+  .sheet{grid-template-columns:minmax(0,1fr) 15rem;column-gap:3.5rem}
+  .sheet > .rail{grid-column:2}
+  .sheet > .body{grid-column:1}
+}
+.rail{
+  font-family:var(--mono);font-size:12.5px;line-height:1.55;
+  color:var(--ink-soft);
+  border-left:1px solid var(--rule);padding-left:1rem;
+  align-self:start;
+}
+.rail b{display:block;font-family:var(--sans);font-weight:600;font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--latao);margin-bottom:.5rem}
+.rail p{margin:0 0 .85rem}
+@media (max-width:999px){.rail{margin-top:2rem;border-left:none;border-top:1px solid var(--rule);padding:1rem 0 0}}
+
+/* ---- masthead ---- */
+header.top{border-bottom:1.5px solid var(--ink)}
+.top-in{display:flex;align-items:baseline;gap:2rem;padding:1.15rem 0;flex-wrap:wrap}
+.mark{
+  font-family:var(--serif);font-weight:700;font-size:1.5rem;letter-spacing:.02em;
+  display:flex;align-items:baseline;gap:.55rem;margin-right:auto;
+}
+.mark span{
+  font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-soft);
+}
+nav.top-nav{display:flex;gap:1.6rem;font-family:var(--sans);font-size:13px;font-weight:500}
+nav.top-nav a{color:var(--ink-soft);text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent}
+nav.top-nav a:hover,nav.top-nav a:focus-visible{color:var(--ink);border-bottom-color:var(--latao)}
+
+/* ---- hero ---- */
+.hero{padding:var(--gap) 0 calc(var(--gap) * .8)}
+.eyebrow{
+  font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--verde);margin:0 0 1.5rem;
+}
+h1{
+  font-weight:600;font-size:clamp(2.5rem,5.6vw,4.15rem);line-height:1.02;
+  letter-spacing:-.021em;margin:0 0 1.6rem;max-width:19ch;text-wrap:balance;
+}
+h1 em{font-style:italic;color:var(--verde)}
+.deck{font-size:1.16rem;color:var(--ink-soft);max-width:var(--measure);margin:0 0 2.4rem}
+.deck strong{color:var(--ink);font-weight:600}
+
+.actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn{
+  font-family:var(--sans);font-weight:600;font-size:13.5px;letter-spacing:.02em;
+  padding:.82rem 1.5rem;text-decoration:none;border:1.5px solid var(--verde);
+  display:inline-block;transition:background .15s,color .15s;
+}
+.btn-solid{background:var(--verde);color:var(--paper)}
+.btn-solid:hover,.btn-solid:focus-visible{background:transparent;color:var(--verde)}
+.btn-ghost{color:var(--verde);background:transparent}
+.btn-ghost:hover,.btn-ghost:focus-visible{background:var(--verde);color:var(--paper)}
+
+.stamp{
+  display:inline-block;transform:rotate(-6.5deg);border:2.5px solid var(--carimbo);
+  color:var(--carimbo);font-family:var(--sans);font-weight:600;font-size:11px;
+  letter-spacing:.17em;text-transform:uppercase;padding:.5rem .9rem;line-height:1.35;
+  text-align:center;opacity:.88;margin-top:2.6rem;
+}
+.stamp small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;opacity:.8}
+
+/* ---- generic section ---- */
+section{padding:var(--gap) 0;border-top:1px solid var(--rule)}
+.peca{
+  font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--latao);margin:0 0 1.1rem;
+}
+h2{font-weight:600;font-size:clamp(1.75rem,3.3vw,2.5rem);line-height:1.12;
+  letter-spacing:-.015em;margin:0 0 1.3rem;max-width:22ch;text-wrap:balance}
+h3{font-family:var(--sans);font-weight:600;font-size:1rem;letter-spacing:-.005em;margin:0 0 .4rem}
+p{max-width:var(--measure)}
+.lede{font-size:1.08rem;color:var(--ink-soft);margin-top:0}
+
+/* ---- narrative beats ---- */
+.beats{display:grid;gap:0;margin-top:2.5rem;border-top:1px solid var(--rule)}
+.beat{display:grid;grid-template-columns:5.5rem 1fr;gap:1.5rem;padding:1.35rem 0;
+  border-bottom:1px solid var(--rule);align-items:baseline}
+.beat time{font-family:var(--mono);font-size:13px;color:var(--carimbo);font-variant-numeric:tabular-nums}
+.beat p{margin:0;font-size:1rem;color:var(--ink-soft)}
+.beat p b{color:var(--ink);font-weight:600}
+@media (max-width:620px){.beat{grid-template-columns:1fr;gap:.35rem}}
+
+/* ---- prompt library ---- */
+.lib{margin-top:2.5rem;border-top:1.5px solid var(--ink)}
+.item{
+  display:grid;grid-template-columns:3.2rem 1fr 9.5rem;gap:1.5rem;
+  padding:1.5rem 0;border-bottom:1px solid var(--rule);align-items:start;
+}
+.item:hover{background:var(--paper-2)}
+.item .idx{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);padding-top:.25rem;
+  font-variant-numeric:tabular-nums}
+.item p{margin:0;font-size:.97rem;color:var(--ink-soft);max-width:56ch}
+.tag{
+  font-family:var(--sans);font-weight:600;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--verde);border:1px solid var(--verde);
+  padding:.28rem .5rem;justify-self:start;white-space:nowrap;
+}
+.tag.urg{color:var(--carimbo);border-color:var(--carimbo)}
+@media (max-width:760px){
+  .item{grid-template-columns:2.5rem 1fr;gap:.35rem 1rem}
+  .item .tag{grid-column:2;margin-top:.7rem}
+}
+
+/* ---- specimen: what the tool actually outputs ---- */
+.specimen{
+  background:var(--paper-2);border:1px solid var(--rule);border-left:3px solid var(--verde);
+  padding:1.6rem 1.75rem;margin-top:2.5rem;max-width:70ch;
+}
+.specimen .head{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:.75rem;margin-bottom:1.1rem;
+}
+.specimen .doc{font-size:1rem;line-height:1.72;margin:0}
+.specimen .doc + .doc{margin-top:.85rem}
+.specimen .sig{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:1.4rem;
+  padding-top:.8rem;border-top:1px dashed var(--rule);
+}
+
+/* ---- legal base ---- */
+.leis{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1.75rem 2.5rem;margin-top:2.5rem}
+.lei{border-top:2px solid var(--ink);padding-top:.9rem}
+.lei dt{font-family:var(--mono);font-size:12.5px;color:var(--carimbo);margin-bottom:.4rem}
+.lei dd{margin:0;font-size:.97rem;color:var(--ink-soft)}
+
+/* ---- closing ---- */
+.close{border-top:1.5px solid var(--ink);text-align:left}
+.close h2{max-width:26ch}
+.thesis{
+  font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.42;max-width:34ch;
+  border-left:3px solid var(--latao);padding-left:1.4rem;margin:0 0 2.4rem;
+}
+footer{border-top:1px solid var(--rule);padding:2.5rem 0 4rem;font-size:.85rem;color:var(--ink-soft)}
+footer p{max-width:72ch;margin:0 0 .7rem}
+footer .fine{font-family:var(--sans);font-size:12px;line-height:1.65}
+
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--latao);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <div class="mark">Prumo <span>Integridade Corporativa</span></div>
+    <nav class="top-nav">
+      <a href="#momento">O momento</a>
+      <a href="#biblioteca">Biblioteca</a>
+      <a href="#peca">Um exemplo</a>
+      <a href="#base">Base legal</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero sheet">
+    <div class="body">
+      <p class="eyebrow">Prompts de integridade para fiscalização</p>
+      <h1>O fiscal já está na recepção. O que a sua empresa <em>escreve</em> nos próximos vinte minutos decide o resto.</h1>
+      <p class="deck">Prumo é uma central de prompts que transforma o encontro com a fiscalização em documento. <strong>Recusar e registrar passa a ser mais rápido do que ceder.</strong> Quem atende não precisa saber o que dizer — precisa apenas abrir o prompt certo.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#biblioteca">Ver a biblioteca</a>
+        <a class="btn btn-ghost" href="#peca">Ler uma peça pronta</a>
+      </div>
+      <div class="stamp">Recusa registrada<small>art. 316 CP · comunicado</small></div>
+    </div>
+    <aside class="rail">
+      <b>Na margem</b>
+      <p>A responsabilidade da pessoa jurídica na Lei 12.846/2013 é objetiva: independe de culpa de quem agiu.</p>
+      <p>O que reduz sanção é programa de integridade efetivo somado a comunicação espontânea — Decreto 11.129/2022.</p>
+      <p>Sem registro escrito, a versão da empresa é apenas a lembrança de quem estava no corredor.</p>
+    </aside>
+  </div>
+
+  <section id="momento">
+    <div class="sheet">
+      <div class="body">
+        <p class="peca">Peça 01 — O momento</p>
+        <h2>A decisão errada quase nunca é tomada numa reunião</h2>
+        <p class="lede">Ela é tomada em pé, sem testemunha, por alguém que não decide nada no resto do ano: o encarregado da obra, a recepcionista, o motorista do caminhão parado na balança. Prumo cobre exatamente essa faixa de tempo.</p>
+
+        <div class="beats">
+          <div class="beat"><time>00:00</time><p>Agente chega sem aviso. <b>Prompt de identificação</b> gera as seis perguntas que precisam de resposta antes de qualquer porta ser aberta: nome, matrícula, órgão, base legal da visita, escopo e prazo.</p></div>
+          <div class="beat"><time>00:07</time><p>Começa a lista de exigências. <b>Prompt de ata</b> abre um registro corrido: hora, item exigido, quem estava presente, o que foi entregue.</p></div>
+          <div class="beat"><time>00:14</time><p>Aparece um pedido sem fundamento aparente. <b>Prompt de fundamentação</b> redige a solicitação formal do dispositivo legal por escrito — cordial, sem confronto, impossível de ignorar.</p></div>
+          <div class="beat"><time>00:19</time><p>A conversa vira insinuação. <b>Prompt de registro</b> descreve o que foi pedido, por quem e diante de quem, em linguagem factual, sem adjetivo e sem acusação.</p></div>
+          <div class="beat"><time>Mesmo dia</time><p>O registro vira comunicação à corregedoria do órgão e à ouvidoria, com cadeia de custódia do que foi coletado. <b>A empresa deixa de ser parte do problema e passa a ser quem noticiou.</b></p></div>
+        </div>
+      </div>
+      <aside class="rail">
+        <b>Por que minutos</b>
+        <p>Concussão é o agente público exigir vantagem — art. 316. Corrupção ativa é a empresa oferecer ou prometer — art. 333.</p>
+        <p>A empresa não escolhe se será abordada. Escolhe se haverá registro.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="biblioteca">
+    <div class="sheet">
+      <div class="body">
+        <p class="peca">Peça 02 — Biblioteca</p>
+        <h2>Oito prompts cobrem a quase totalidade dos casos reais</h2>
+        <p class="lede">Cada prompt já chega com o contexto do setor, o formato de saída e as perguntas que a IA deve fazer antes de escrever. Você preenche o que aconteceu; sai um documento datado, assinável e arquivável.</p>
+
+        <div class="lib">
+          <div class="item"><div class="idx">01</div><div><h3>Identificação do agente e do escopo</h3><p>Seis perguntas de abertura e o roteiro do que pode ser aberto sem mandado, por tipo de órgão.</p></div><div class="tag urg">Em campo</div></div>
+          <div class="item"><div class="idx">02</div><div><h3>Ata de atendimento à fiscalização</h3><p>Registro corrido do atendimento, com testemunhas nominadas e relação do que foi exigido e entregue.</p></div><div class="tag urg">Em campo</div></div>
+          <div class="item"><div class="idx">03</div><div><h3>Pedido de fundamentação por escrito</h3><p>Solicita o dispositivo legal da exigência sem criar atrito, e cria a prova de que a empresa perguntou.</p></div><div class="tag">Formal</div></div>
+          <div class="item"><div class="idx">04</div><div><h3>Registro de solicitação indevida</h3><p>Descrição factual do que foi pedido, por quem, na presença de quem, com hora e local. Sem adjetivos.</p></div><div class="tag urg">Em campo</div></div>
+          <div class="item"><div class="idx">05</div><div><h3>Comunicação à corregedoria e à ouvidoria</h3><p>Encaminhamento do registro com cadeia de custódia dos anexos e pedido de protocolo.</p></div><div class="tag">Formal</div></div>
+          <div class="item"><div class="idx">06</div><div><h3>Treinamento de linha de frente</h3><p>Simulação de abordagem para recepção, obra, frota e almoxarifado, com correção das respostas.</p></div><div class="tag">Preventivo</div></div>
+          <div class="item"><div class="idx">07</div><div><h3>Diligência de despachante e intermediário</h3><p>Questionário de contratação e cláusula antissuborno para quem fala com o poder público em seu nome.</p></div><div class="tag">Preventivo</div></div>
+          <div class="item"><div class="idx">08</div><div><h3>Resposta a auto de infração</h3><p>Estrutura de defesa administrativa: prazo, fato, fundamento, pedido e documentos de instrução.</p></div><div class="tag">Formal</div></div>
+        </div>
+      </div>
+      <aside class="rail">
+        <b>Fora do escopo</b>
+        <p>Prumo não redige nada que oriente pagamento, facilitação, intermediação informal ou omissão de registro.</p>
+        <p>Essas saídas são bloqueadas por política do produto, não por filtro genérico do modelo.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="peca">
+    <div class="sheet">
+      <div class="body">
+        <p class="peca">Peça 03 — Saída</p>
+        <h2>O que sai do prompt 04</h2>
+        <p class="lede">Exemplo ilustrativo, com dados fictícios, do documento gerado a partir de quatro campos preenchidos no celular.</p>
+
+        <div class="specimen">
+          <div class="head"><span>REGISTRO INTERNO — SOLICITAÇÃO INDEVIDA</span><span>Exemplo</span></div>
+          <p class="doc">Aos catorze dias do mês corrente, às 10h42, na portaria da unidade industrial, o agente identificado como servidor do órgão municipal de posturas, portador do crachá apresentado e fotografado no anexo I, informou ao encarregado de manutenção que o auto de infração relativo ao alvará poderia “não ser lavrado” mediante contribuição em espécie ao final do expediente.</p>
+          <p class="doc">Estavam presentes o encarregado de manutenção e a assistente administrativa, ambos nominados no anexo II. A solicitação foi recusada de imediato, sem discussão de valores, e o agente foi informado de que o atendimento seguiria por via documental.</p>
+          <p class="doc">Este registro é lavrado no mesmo dia do fato, para comunicação à corregedoria do órgão e à ouvidoria competente, e permanece arquivado na pasta de integridade da unidade.</p>
+          <div class="sig">Lavrado em 14/—/—— às 11h05 · Anexos I–II · Encaminhamento pendente de protocolo</div>
+        </div>
+      </div>
+      <aside class="rail">
+        <b>Por que assim</b>
+        <p>Sem adjetivo, sem acusação de crime, sem valor citado. Descreve conduta, hora, local e testemunha.</p>
+        <p>É o formato que sobrevive a leitura por terceiro meses depois.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="base">
+    <div class="sheet">
+      <div class="body">
+        <p class="peca">Peça 04 — Base legal</p>
+        <h2>Os textos que sustentam cada prompt</h2>
+        <p class="lede">Toda peça gerada aponta o dispositivo em que se apoia. Nada é redigido por analogia solta.</p>
+        <dl class="leis">
+          <div class="lei"><dt>Lei 12.846/2013</dt><dd>Responsabiliza a pessoa jurídica de forma objetiva por atos contra a administração pública, e admite atenuação por programa de integridade e por comunicação espontânea.</dd></div>
+          <div class="lei"><dt>Decreto 11.129/2022</dt><dd>Regulamenta a lei e detalha os parâmetros de avaliação do programa de integridade considerados em processo administrativo de responsabilização.</dd></div>
+          <div class="lei"><dt>Código Penal, art. 316</dt><dd>Concussão: exigir, para si ou para outrem, vantagem indevida em razão da função pública. É a hipótese do agente que aborda.</dd></div>
+          <div class="lei"><dt>Código Penal, art. 333</dt><dd>Corrupção ativa: oferecer ou prometer vantagem indevida a funcionário público. É a hipótese que a empresa precisa nunca alcançar.</dd></div>
+          <div class="lei"><dt>ABNT NBR ISO 37001</dt><dd>Sistema de gestão antissuborno. Fornece a estrutura de controles, diligência de terceiros e canal de denúncia que os prompts alimentam.</dd></div>
+          <div class="lei"><dt>Lei 13.709/2018</dt><dd>Trata dos dados pessoais que aparecem nos registros — nomes, imagens, testemunhas. Define como o material coletado deve ser guardado.</dd></div>
+        </dl>
+      </div>
+      <aside class="rail">
+        <b>Aviso</b>
+        <p>Prumo é ferramenta de documentação e treinamento. Não substitui advogado, parecer nem decisão do jurídico da empresa.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="close">
+    <p class="peca">Prumo</p>
+    <p class="thesis">O produto existe para uma coisa só: tornar a recusa documentada mais fácil do que a cedência silenciosa.</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="#biblioteca">Solicitar acesso</a>
+      <a class="btn btn-ghost" href="#momento">Falar com o time</a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fine">Prumo — Central de prompts de integridade corporativa. Direção visual A: “Autos”. Peça de estudo, sem vínculo com órgão público, entidade de classe ou autoridade de qualquer esfera.</p>
+    <p class="fine">Nenhum conteúdo desta página orienta pagamento, facilitação, intermediação informal ou ocultação de registro perante agente público.</p>
+  </footer>
+
+</div>

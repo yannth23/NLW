@@ -1,0 +1,361 @@
+<!-- FONTS: Archivo=archivo:400,500,600,700 | Plex Mono=ibm-plex-mono:400,500 -->
+<title>Prumo — Opção B: Painel</title>
+
+<style>
+/* FONTFACE */
+
+:root{
+  --bg:#080D14;
+  --panel:#0F1722;
+  --panel-2:#15202D;
+  --line:#1E2C3C;
+  --line-soft:#182432;
+  --text:#CBD8E7;
+  --text-hi:#EAF1F9;
+  --muted:#78899F;
+  --teal:#35A8A0;
+  --teal-dim:#1D5E5A;
+  --amber:#DFA23A;
+  --red:#DB5F52;
+  --green:#4EB47C;
+
+  --sans:'Archivo',system-ui,sans-serif;
+  --mono:'Plex Mono',ui-monospace,monospace;
+  --gap:clamp(3rem,6vw,5.5rem);
+}
+
+@media (prefers-color-scheme:light){
+  :root{
+    --bg:#EEF2F7;--panel:#FFFFFF;--panel-2:#F6F9FC;--line:#DBE3ED;--line-soft:#E7EDF4;
+    --text:#22303F;--text-hi:#0B1420;--muted:#5D6C7F;
+    --teal:#0E7A73;--teal-dim:#B6DBD8;--amber:#8F6410;--red:#AF382C;--green:#1C7A4D;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#080D14;--panel:#0F1722;--panel-2:#15202D;--line:#1E2C3C;--line-soft:#182432;
+  --text:#CBD8E7;--text-hi:#EAF1F9;--muted:#78899F;
+  --teal:#35A8A0;--teal-dim:#1D5E5A;--amber:#DFA23A;--red:#DB5F52;--green:#4EB47C;
+}
+:root[data-theme="light"]{
+  --bg:#EEF2F7;--panel:#FFFFFF;--panel-2:#F6F9FC;--line:#DBE3ED;--line-soft:#E7EDF4;
+  --text:#22303F;--text-hi:#0B1420;--muted:#5D6C7F;
+  --teal:#0E7A73;--teal-dim:#B6DBD8;--amber:#8F6410;--red:#AF382C;--green:#1C7A4D;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(1rem,3vw,2rem)}
+
+.label{font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---- status bar + header ---- */
+.statusbar{
+  border-bottom:1px solid var(--line);background:var(--panel);
+  font-family:var(--mono);font-size:11.5px;color:var(--muted);
+}
+.statusbar .wrap{display:flex;gap:1.5rem;padding:.5rem clamp(1rem,3vw,2rem);flex-wrap:wrap;align-items:center}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;margin-right:.45rem;vertical-align:middle}
+.statusbar .push{margin-left:auto}
+
+header.nav{border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:2rem;padding:1rem 0;flex-wrap:wrap}
+.mark{display:flex;align-items:center;gap:.6rem;margin-right:auto;font-weight:700;font-size:1.15rem;
+  letter-spacing:-.02em;color:var(--text-hi)}
+.mark .glyph{width:22px;height:22px;border:1.5px solid var(--teal);position:relative;flex:none}
+.mark .glyph::after{content:"";position:absolute;inset:5px;background:var(--teal)}
+.mark small{font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.1em;
+  color:var(--muted);text-transform:uppercase}
+.nav-links{display:flex;gap:1.5rem;font-size:13.5px;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--text-hi)}
+.cta{
+  font-size:13px;font-weight:600;padding:.55rem 1.1rem;background:var(--teal);color:var(--bg);
+  text-decoration:none;border:1px solid var(--teal);
+}
+.cta:hover,.cta:focus-visible{background:transparent;color:var(--teal)}
+
+/* ---- hero ---- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem;padding:var(--gap) 0}
+@media (min-width:1000px){.hero{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:3.5rem;align-items:start}}
+h1{font-size:clamp(2.1rem,4.4vw,3.35rem);line-height:1.06;letter-spacing:-.03em;font-weight:700;
+  color:var(--text-hi);margin:1.1rem 0 1.2rem;text-wrap:balance}
+h1 span{color:var(--teal)}
+.deck{color:var(--muted);font-size:1.05rem;max-width:52ch;margin:0 0 1.8rem}
+.deck b{color:var(--text-hi);font-weight:600}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn-ghost{font-size:13px;font-weight:600;padding:.55rem 1.1rem;border:1px solid var(--line);
+  color:var(--text);text-decoration:none}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--teal);color:var(--teal)}
+
+/* ---- console ---- */
+.console{background:var(--panel);border:1px solid var(--line)}
+.console-head{display:flex;align-items:center;gap:.75rem;padding:.7rem .9rem;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:11px;color:var(--muted);flex-wrap:wrap}
+.sev{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:10.5px;
+  padding:.15rem .5rem;border:1px solid currentColor;letter-spacing:.06em}
+.sev-red{color:var(--red)}.sev-amb{color:var(--amber)}.sev-grn{color:var(--green)}
+.tabs{display:flex;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{
+  appearance:none;background:none;border:none;border-bottom:2px solid transparent;
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--muted);
+  padding:.7rem .95rem;cursor:pointer;white-space:nowrap;
+}
+.tabs button[aria-selected="true"]{color:var(--teal);border-bottom-color:var(--teal);background:var(--panel-2)}
+.tabs button:hover{color:var(--text-hi)}
+.console-body{padding:1.1rem;font-family:var(--mono);font-size:12.8px;line-height:1.72;min-height:19rem}
+.console-body .k{color:var(--muted)}
+.console-body .v{color:var(--text-hi)}
+.console-body .t{color:var(--teal)}
+.console-body .row{display:grid;grid-template-columns:5.25rem minmax(0,1fr);gap:.9rem;
+  padding:.42rem 0;border-bottom:1px dashed var(--line-soft)}
+.console-body .row:last-child{border-bottom:none}
+.console-foot{border-top:1px solid var(--line);padding:.6rem .9rem;display:flex;gap:1rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* ---- panels ---- */
+section{padding:var(--gap) 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.45rem,2.6vw,2rem);font-weight:700;letter-spacing:-.025em;line-height:1.16;
+  color:var(--text-hi);margin:.8rem 0 .8rem;max-width:24ch;text-wrap:balance}
+.sub{color:var(--muted);max-width:62ch;margin:0 0 2rem}
+.grid{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (min-width:760px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:759px){.grid{grid-template-columns:1fr}}
+.cell{background:var(--panel);padding:1.25rem}
+.cell h3{font-size:.98rem;font-weight:600;color:var(--text-hi);margin:.55rem 0 .4rem;letter-spacing:-.01em}
+.cell p{font-size:.88rem;color:var(--muted);margin:0}
+.stripe{height:2px;width:2.2rem;background:var(--teal)}
+.stripe.amb{background:var(--amber)}.stripe.red{background:var(--red)}.stripe.grn{background:var(--green)}
+
+/* ---- board (severity table) ---- */
+.board{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+  font-size:.88rem}
+.board th{text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);padding:.75rem .9rem;border-bottom:1px solid var(--line);white-space:nowrap}
+.board td{padding:.85rem .9rem;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.board tr:last-child td{border-bottom:none}
+.board td:first-child{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.board strong{color:var(--text-hi);font-weight:600}
+.board .who{color:var(--muted);font-size:.83rem;display:block}
+.scroll{overflow-x:auto}
+
+/* ---- timeline strip ---- */
+.strip{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:2rem}
+@media (min-width:820px){.strip{grid-template-columns:repeat(5,1fr)}}
+.tick{background:var(--panel);padding:1.1rem}
+.tick .when{font-family:var(--mono);font-size:11.5px;color:var(--amber)}
+.tick p{font-size:.86rem;color:var(--muted);margin:.5rem 0 0}
+.tick p b{color:var(--text-hi);font-weight:600}
+
+.spark{display:block;width:100%;height:56px;margin-top:1.2rem}
+
+/* ---- closing ---- */
+.close{display:grid;gap:2rem;align-items:center}
+@media (min-width:860px){.close{grid-template-columns:1.4fr 1fr}}
+.thesis{font-size:clamp(1.2rem,2.3vw,1.6rem);line-height:1.4;color:var(--text-hi);font-weight:600;
+  letter-spacing:-.02em;max-width:30ch;margin:0}
+.note{border-left:2px solid var(--amber);padding-left:1rem;font-size:.88rem;color:var(--muted);margin:0}
+footer{border-top:1px solid var(--line);padding:2rem 0 3.5rem;font-size:.8rem;color:var(--muted)}
+footer p{max-width:74ch;margin:0 0 .6rem}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="statusbar">
+  <div class="wrap">
+    <span><span class="dot"></span>Política antissuborno ativa</span>
+    <span>Retenção de registro: 5 anos</span>
+    <span>Trilha de auditoria: imutável</span>
+    <span class="push">v2.4 · ISO 37001</span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <div class="mark"><span class="glyph"></span>Prumo <small>compliance ops</small></div>
+    <nav class="nav-links">
+      <a href="#console">Console</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#atendimento">Atendimento</a>
+      <a href="#limites">Limites</a>
+    </nav>
+    <a class="cta" href="#console">Solicitar acesso</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero" id="console">
+    <div>
+      <p class="label">Central de prompts de integridade</p>
+      <h1>Quando o fiscal chega, alguém da sua equipe vai <span>improvisar</span>. A menos que tenha o texto pronto.</h1>
+      <p class="deck">Prumo é o console que a linha de frente abre no celular durante uma fiscalização. Ele monta o prompt certo para a situação e devolve um documento datado — ata, pedido de fundamentação, registro de solicitação indevida. <b>A recusa vira o caminho mais rápido.</b></p>
+      <div class="hero-actions">
+        <a class="cta" href="#catalogo">Ver catálogo</a>
+        <a class="btn-ghost" href="#limites">O que ele nunca escreve</a>
+      </div>
+      <svg class="spark" viewBox="0 0 320 56" preserveAspectRatio="none" aria-label="Registros formalizados por trimestre, série ilustrativa" role="img">
+        <defs>
+          <linearGradient id="fill" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="var(--teal)" stop-opacity=".28"/>
+            <stop offset="1" stop-color="var(--teal)" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="14" x2="320" y2="14" stroke="var(--line)" stroke-width="1"/>
+        <line x1="0" y1="34" x2="320" y2="34" stroke="var(--line)" stroke-width="1"/>
+        <path d="M0 48 L46 44 L92 46 L138 36 L184 30 L230 22 L276 18 L320 9 L320 56 L0 56 Z" fill="url(#fill)"/>
+        <path d="M0 48 L46 44 L92 46 L138 36 L184 30 L230 22 L276 18 L320 9" fill="none" stroke="var(--teal)" stroke-width="1.6"/>
+        <circle cx="320" cy="9" r="3" fill="var(--teal)"/>
+      </svg>
+      <p class="label" style="margin-top:.6rem">Série ilustrativa — registros formalizados por trimestre</p>
+    </div>
+
+    <div class="console">
+      <div class="console-head">
+        <span>PROMPT EM COMPOSIÇÃO</span>
+        <span class="sev sev-amb" id="sev">SEVERIDADE MÉDIA</span>
+        <span style="margin-left:auto" id="ref">REF 04-A</span>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Situações">
+        <button role="tab" aria-selected="true" data-k="abordagem">Abordagem</button>
+        <button role="tab" aria-selected="false" data-k="exigencia">Exigência sem base</button>
+        <button role="tab" aria-selected="false" data-k="indevida">Solicitação indevida</button>
+        <button role="tab" aria-selected="false" data-k="encaminhar">Encaminhamento</button>
+      </div>
+      <div class="console-body" id="out"></div>
+      <div class="console-foot">
+        <span>Saída: documento datado + anexos</span>
+        <span style="margin-left:auto" id="foot">Retido na trilha de auditoria</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="catalogo">
+    <p class="label">Catálogo</p>
+    <h2>Quatro famílias, oito prompts, um formato de saída</h2>
+    <p class="sub">Cada prompt carrega o contexto do órgão, o formato do documento e as perguntas que o modelo precisa fazer antes de escrever qualquer linha.</p>
+    <div class="grid grid-4">
+      <div class="cell"><div class="stripe red"></div><h3>Em campo</h3><p>Identificação do agente, escopo da visita e ata corrida do atendimento, escritos enquanto a fiscalização acontece.</p></div>
+      <div class="cell"><div class="stripe amb"></div><h3>Formalização</h3><p>Pedido de fundamentação legal por escrito, registro de solicitação indevida e resposta a auto de infração.</p></div>
+      <div class="cell"><div class="stripe"></div><h3>Encaminhamento</h3><p>Comunicação à corregedoria e à ouvidoria com cadeia de custódia dos anexos e controle de protocolo.</p></div>
+      <div class="cell"><div class="stripe grn"></div><h3>Prevenção</h3><p>Simulação de abordagem para a linha de frente e diligência antissuborno de despachantes e intermediários.</p></div>
+    </div>
+  </section>
+
+  <section id="atendimento">
+    <p class="label">Atendimento</p>
+    <h2>A linha do tempo que a empresa precisa conseguir reconstruir depois</h2>
+    <p class="sub">Cada etapa gera um artefato próprio. Sem eles, a defesa da empresa depende da memória de quem estava no corredor.</p>
+    <div class="strip">
+      <div class="tick"><div class="when mono">00:00</div><p><b>Identificação.</b> Nome, matrícula, órgão, base legal e escopo, antes de qualquer porta ser aberta.</p></div>
+      <div class="tick"><div class="when mono">00:07</div><p><b>Ata.</b> Hora, item exigido, presentes e o que foi entregue, em registro corrido.</p></div>
+      <div class="tick"><div class="when mono">00:14</div><p><b>Fundamentação.</b> Pedido cordial do dispositivo legal por escrito.</p></div>
+      <div class="tick"><div class="when mono">00:19</div><p><b>Registro.</b> Descrição factual do que foi pedido, por quem, diante de quem.</p></div>
+      <div class="tick"><div class="when mono">D+0</div><p><b>Encaminhamento.</b> Corregedoria e ouvidoria, com protocolo e anexos.</p></div>
+    </div>
+
+    <div class="scroll" style="margin-top:2rem">
+      <table class="board">
+        <thead><tr><th>Fase</th><th>Artefato gerado</th><th>Quem opera</th><th>Base</th></tr></thead>
+        <tbody>
+          <tr><td>00:00</td><td><strong>Ficha de identificação do agente</strong><span class="who">Fotos do crachá e do documento de designação em anexo</span></td><td>Portaria, recepção</td><td class="mono">Escopo da visita</td></tr>
+          <tr><td>00:07</td><td><strong>Ata de atendimento à fiscalização</strong><span class="who">Registro corrido com testemunhas nominadas</span></td><td>Responsável da unidade</td><td class="mono">Prova documental</td></tr>
+          <tr><td>00:14</td><td><strong>Pedido de fundamentação por escrito</strong><span class="who">Sem confronto, com prazo e via de resposta</span></td><td>Responsável da unidade</td><td class="mono">Devido processo</td></tr>
+          <tr><td>00:19</td><td><strong>Registro de solicitação indevida</strong><span class="who">Factual, sem adjetivo e sem citação de valores</span></td><td>Quem presenciou</td><td class="mono">CP art. 316</td></tr>
+          <tr><td>D+0</td><td><strong>Comunicação à corregedoria e ouvidoria</strong><span class="who">Cadeia de custódia dos anexos e pedido de protocolo</span></td><td>Compliance</td><td class="mono">Lei 12.846/2013</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="limites">
+    <p class="label">Limites</p>
+    <h2>O que o console recusa a escrever</h2>
+    <p class="sub">Estas recusas são regra de produto, escritas no sistema, e não dependem do filtro genérico do modelo. Elas aparecem na trilha de auditoria como tentativa bloqueada.</p>
+    <div class="grid grid-3">
+      <div class="cell"><div class="stripe red"></div><h3>Qualquer texto que negocie</h3><p>Nenhuma mensagem que discuta valor, condição, prazo ou forma de pagamento a agente público, direta ou por intermediário.</p></div>
+      <div class="cell"><div class="stripe red"></div><h3>Instrução para omitir</h3><p>Nada que oriente apagar registro, atrasar comunicação obrigatória ou alterar documento já lavrado.</p></div>
+      <div class="cell"><div class="stripe red"></div><h3>Roteiro de intermediação informal</h3><p>Nenhuma abordagem por “conhecido no órgão”, despachante fora de contrato ou canal paralelo ao protocolo.</p></div>
+    </div>
+    <p class="sub" style="margin-top:2rem">A trilha existe para os dois lados: ela protege a empresa que registrou e expõe a tentativa que alguém fez de contornar o registro.</p>
+  </section>
+
+  <section>
+    <div class="close">
+      <p class="thesis">Prumo torna a recusa documentada mais rápida do que a cedência silenciosa. É esse o produto inteiro.</p>
+      <p class="note">Ferramenta de documentação e treinamento. Não substitui advogado, parecer jurídico ou decisão do jurídico da empresa. Nenhum conteúdo orienta pagamento, facilitação ou ocultação perante agente público.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Prumo — Central de prompts de integridade corporativa. Direção visual B: “Painel”. Peça de estudo, sem vínculo com órgão público, entidade de classe ou autoridade de qualquer esfera. Números e séries exibidos são ilustrativos.</p>
+  </footer>
+</div>
+
+<script>
+const CENAS = {
+  abordagem:{
+    sev:['SEVERIDADE BAIXA','sev-grn'], ref:'REF 01-A', foot:'Retido na trilha de auditoria',
+    txt:[['papel','Você é assistente de conformidade de uma indústria de médio porte.'],
+         ['situacao','Um agente público chegou sem aviso à portaria e pede acesso à área produtiva.'],
+         ['tarefa','Gere as perguntas de identificação e o registro de escopo antes de qualquer acesso.'],
+         ['pergunte','Órgão, nome e matrícula do agente, base legal invocada, área pretendida, prazo.'],
+         ['saida','Ficha de identificação datada + lista do que pode ser aberto sem mandado.'],
+         ['tom','Cordial, sem confronto, sem opinião jurídica.']]},
+  exigencia:{
+    sev:['SEVERIDADE MÉDIA','sev-amb'], ref:'REF 03-A', foot:'Gera prazo de acompanhamento',
+    txt:[['papel','Você redige comunicação formal da empresa para órgão fiscalizador.'],
+         ['situacao','Foi exigido documento que a empresa não reconhece como obrigatório.'],
+         ['tarefa','Redija pedido de fundamentação legal por escrito, sem negar o atendimento.'],
+         ['pergunte','Item exigido, hora, agente, o que já foi entregue, prazo dado.'],
+         ['saida','Ofício de uma página com pedido de dispositivo legal e via de resposta.'],
+         ['tom','Colaborativo. Nunca acusatório. A empresa continua atendendo.']]},
+  indevida:{
+    sev:['SEVERIDADE ALTA','sev-red'], ref:'REF 04-A', foot:'Aciona comunicação obrigatória',
+    txt:[['papel','Você lavra registro interno de fato ocorrido durante fiscalização.'],
+         ['situacao','Houve insinuação ou pedido de vantagem indevida a um empregado.'],
+         ['tarefa','Descreva conduta, hora, local e testemunhas. Sem adjetivo, sem valor, sem tipificação.'],
+         ['pergunte','O que foi dito, por quem, diante de quem, onde, em que horário.'],
+         ['saida','Registro datado no mesmo dia + anexos numerados + recusa consignada.'],
+         ['bloqueio','Recusa automática de qualquer redação que negocie a exigência.']]},
+  encaminhar:{
+    sev:['SEVERIDADE ALTA','sev-red'], ref:'REF 05-A', foot:'Exige número de protocolo',
+    txt:[['papel','Você prepara comunicação da empresa a corregedoria e ouvidoria do órgão.'],
+         ['situacao','Existe registro interno de solicitação indevida lavrado no mesmo dia.'],
+         ['tarefa','Monte o encaminhamento com cadeia de custódia dos anexos e pedido de protocolo.'],
+         ['pergunte','Órgão, unidade, data do fato, anexos disponíveis, responsável interno.'],
+         ['saida','Peça de comunicação + índice de anexos + controle de protocolo e prazo.'],
+         ['tom','Institucional. Relata fato, não imputa crime.']]}
+};
+
+const out = document.getElementById('out');
+const sevEl = document.getElementById('sev');
+const refEl = document.getElementById('ref');
+const footEl = document.getElementById('foot');
+const tabs = [...document.querySelectorAll('.tabs button')];
+
+function render(key){
+  const c = CENAS[key];
+  out.innerHTML = c.txt
+    .map(([k,v]) => '<div class="row"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>')
+    .join('');
+  sevEl.textContent = c.sev[0];
+  sevEl.className = 'sev ' + c.sev[1];
+  refEl.textContent = c.ref;
+  footEl.textContent = c.foot;
+}
+
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(o => o.setAttribute('aria-selected', String(o === t)));
+  render(t.dataset.k);
+}));
+
+render('abordagem');
+tabs[0].setAttribute('aria-selected','true');
+</script>
