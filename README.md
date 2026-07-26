@@ -1,15 +1,15 @@
 # Prumo
 
-Central de prompts de integridade corporativa para o encontro com a fiscalização.
+Central de prompts para avaliação de notificação e auto de infração.
 
-O produto gera o documento certo no momento da abordagem — ata de atendimento, pedido de
-fundamentação legal por escrito, registro de solicitação indevida e comunicação à corregedoria
-e à ouvidoria. A tese do produto é uma só: **tornar a recusa documentada mais fácil do que a
-cedência silenciosa.**
+O produto lê o auto recebido, confere item a item o que a norma exige dele, identifica o órgão
+autuante e a regra de contagem, calcula a data limite de protocolo e monta a estrutura da defesa.
+**A análise que consumia a primeira semana passa a caber na primeira hora.**
 
-Prumo é ferramenta de documentação e treinamento. Não substitui advogado nem parecer jurídico,
-e nenhum prompt orienta pagamento, facilitação, intermediação informal ou ocultação de registro
-perante agente público.
+Três limites escritos no produto, não no filtro do modelo: não declara nulidade (aponta o vício e
+o dispositivo, a conclusão é do advogado), não trata de valor com o órgão, e não assina nem
+protocola peça. Um quarto grupo de prompts cobre integridade: registro de solicitação indevida
+durante a fiscalização e encaminhamento à corregedoria.
 
 ## Estado atual
 
