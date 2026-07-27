@@ -1,15 +1,23 @@
 # Prumo
 
-Central de prompts para avaliação de notificação e auto de infração.
+Segunda opinião sobre o auto de infração fiscal.
 
-O produto lê o auto recebido, confere item a item o que a norma exige dele, identifica o órgão
-autuante e a regra de contagem, calcula a data limite de protocolo e monta a estrutura da defesa.
-**A análise que consumia a primeira semana passa a caber na primeira hora.**
+O produto lê o auto, apura qual redação da norma regia o fato gerador, confere o lançamento
+parcela a parcela contra a faixa legal, quantifica o custo de cada caminho (defender, pagar com
+redução, parcelar, transacionar) e devolve a data limite do rito do ente autuante.
 
-Três limites escritos no produto, não no filtro do modelo: não declara nulidade (aponta o vício e
-o dispositivo, a conclusão é do advogado), não trata de valor com o órgão, e não assina nem
-protocola peça. Um quarto grupo de prompts cobre integridade: registro de solicitação indevida
-durante a fiscalização e encaminhamento à corregedoria.
+**A posição competitiva é verificabilidade, não corpus.** A categoria de pesquisa tributária com
+IA já tem legislação, CARF, STJ e STF. O que ela não resolve é citação que não existe e norma
+aplicada na redação errada. Duas regras de produto endereçam isso:
+
+1. Toda citação passa por verificação contra a fonte oficial antes de chegar ao usuário, com data
+   de consulta registrada. Quando a verificação falha, o campo sai em branco e o laudo lista o
+   termo pesquisado.
+2. Toda norma vem na redação vigente na data do fato gerador, não na de hoje.
+
+O produto se mede: cem autos reais anonimizados com desfecho conhecido, rodados a cada versão,
+em três métricas (citações que resolvem, vigência correta, valor dentro da faixa). O número
+acompanha a proposta comercial e não a página, porque envelhece.
 
 ## Estado atual
 
