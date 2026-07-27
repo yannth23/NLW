@@ -1,0 +1,55 @@
+SECRETARIA DE ESTADO DA FAZENDA
+AUTO DE INFRAÇÃO E IMPOSIÇÃO DE MULTA nº 3.114.982-7
+
+Autuado: COMERCIAL RIBEIRA DISTRIBUIDORA LTDA
+CNPJ: 00.000.000/0001-00
+Endereço: Rua das Palmeiras, 480 — Jaguaré — São Paulo/SP
+
+Data da lavratura: 14/03/2025
+Período fiscalizado: 01/01/2019 a 31/12/2019
+Data do fato gerador apontada: 07/02/2019
+Ciência do autuado: 21/03/2025 (via Domicílio Eletrônico)
+
+DESCRIÇÃO DOS FATOS
+
+Item 1 — Creditamento indevido de ICMS. Constatou-se, mediante confronto entre
+os arquivos da Escrituração Fiscal Digital e as notas fiscais eletrônicas de
+entrada, o aproveitamento de crédito de ICMS relativo a mercadorias destinadas
+a uso e consumo do estabelecimento, no valor de R$ 184.320,00.
+
+Item 2 — Falta de recolhimento por diferença de alíquota em operação
+interestadual. O autuado aplicou alíquota de 7% em operação destinada a
+contribuinte situado no Estado de Minas Gerais, quando a operação comportava
+alíquota de 12%, resultando em recolhimento a menor de R$ 62.400,00.
+
+Item 3 — Escrituração em desacordo. Divergência entre o registro C170 da EFD e
+o documento fiscal correspondente em 38 lançamentos do período.
+
+APURAÇÃO
+
+  Item 1  principal  R$ 184.320,00   multa  R$ 92.160,00   (50%)
+  Item 2  principal  R$  62.400,00   multa  R$ 62.400,00   (100%)
+  Item 3  principal  —                multa  R$  9.500,00   (multa formal)
+
+  Principal ................ R$ 246.720,00
+  Multa .................... R$ 164.060,00
+  Juros até a lavratura .... R$ 118.774,00
+  TOTAL .................... R$ 529.554,00
+
+FUNDAMENTAÇÃO
+
+Artigos 20 e 33 da Lei Complementar nº 87, de 1996; art. 155, §2º da
+Constituição Federal; arts. 142 e 173 do Código Tributário Nacional.
+
+PRAZO
+
+O autuado dispõe do prazo legal, contado da ciência, para apresentar
+impugnação junto ao Tribunal de Impostos e Taxas, ou para efetuar o
+recolhimento com a redução prevista na legislação estadual.
+
+Auditor Fiscal da Receita Estadual
+Matrícula 000.000-0
+
+---
+Documento sintético, criado para teste do Prumo. Empresa, números, valores e
+número do auto são fictícios.

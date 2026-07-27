@@ -19,6 +19,51 @@ O produto se mede: cem autos reais anonimizados com desfecho conhecido, rodados 
 em três métricas (citações que resolvem, vigência correta, valor dentro da faixa). O número
 acompanha a proposta comercial e não a página, porque envelhece.
 
+## Verificador de citação
+
+O verificador é a peça que sustenta a promessa. Ele roda **fora do modelo**, sem chave de API,
+e confere a saída de qualquer IA — inclusive a nossa. São quatro etapas:
+
+1. **Extrair.** `citacoes.extrair(texto)` reconhece lei, lei complementar, decreto, decreto-lei,
+   CTN, Constituição e súmulas nas grafias em que aparecem de verdade (`Lei nº 9.784, de 1999`,
+   `Lei 9784/99`, `lei 9.784/1999`), e amarra o `art. N` mais próximo, antes ou depois da norma.
+   Um ponto final entre os dois corta o vínculo.
+2. **Resolver a URL.** `citacoes.urls(c)` monta as candidatas no Planalto. Não há padrão único:
+   lei anterior a 2000 fica em `/leis/L9784.htm`, de 2003 em diante em blocos de quatro anos
+   (`/_ato2019-2022/2020/lei/L13988.htm`), lei complementar em `/leis/lcp/`, e várias existem
+   só na versão `compilado`. A lista vai da mais provável para a menos.
+3. **Abrir e achar o artigo.** Baixa a página, tira o HTML, recorta o bloco do `Art. N` até o
+   artigo seguinte. `Art. 5` não casa dentro de `Art. 50`.
+4. **Classificar.** `CONFERE` só quando a norma abriu **e** o artigo estava lá. `ARTIGO_AUSENTE`
+   quando a lei existe e o artigo não — é o erro mais comum e o mais difícil de perceber lendo.
+   `NAO_ENCONTRADA`, `SEM_FONTE` (súmula, que não tem URL determinística) e `INDISPONIVEL`
+   (fonte fora do ar) **não passam**. Falha fechada: se não deu para abrir, não sai.
+
+Quando o bloco do artigo contém `(Redação dada pela Lei nº ...)`, o relatório marca a alteração.
+É o gancho da regra de vigência: artigo alterado exige saber a data do fato gerador.
+
+```bash
+python3 -m prumo prompts                                            # a biblioteca
+python3 -m prumo verificar prumo/exemplo/saida-com-erro.txt --demo  # sem rede
+python3 -m prumo verificar parecer.txt                              # contra o Planalto
+python3 -m prumo avaliar --prompt 02 auto.txt --dry-run             # a requisição montada
+ANTHROPIC_API_KEY=... python3 -m prumo avaliar --prompt 02 auto.txt # roda e verifica
+python3 -m unittest prumo.testes -v                                 # 32 testes, sem rede
+```
+
+`prumo/exemplo/saida-com-erro.txt` imita um parecer de IA com onze citações, três delas
+plantadas. O verificador reprova a lei que não existe e o artigo que não consta da lei, e
+devolve `exit 1`. `prumo/exemplo/auto-exemplo.txt` é um auto de ICMS sintético para o `avaliar`.
+
+`prumo/fonte_simulada.py` é um recorte curto das normas no formato do Planalto, usado pelos
+testes e pelo `--demo`. Não é cache: nada que sai dele vale como citação verificada.
+
+O `avaliar` chama `claude-opus-5` com `output_config.format` de tipo `json_schema`
+(`prumo/laudo.py`), o preâmbulo em bloco de sistema cacheado, e passa a resposta pelo
+verificador antes de imprimir. O esquema tem um campo obrigatório `nao_verificado`, para que
+"não consegui confirmar" seja uma saída barata — quando a única saída possível é um texto
+bem escrito, é o texto bem escrito que o modelo entrega.
+
 ## Estado atual
 
 Direção visual **B — Painel** aprovada e desenvolvida em `design/src/index.html`: sala de
